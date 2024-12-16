@@ -22,9 +22,7 @@ public class Notification {
     private Long userId;
 
     @Enumerated(EnumType.STRING)
-    private TransactionType transactionType;
-
-    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Status status;
 
     @Column(nullable = false, updatable = false)

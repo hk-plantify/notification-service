@@ -3,6 +3,7 @@ package com.plantify.notification.service;
 import com.plantify.notification.domain.dto.NotificationResponse;
 import com.plantify.notification.domain.dto.TransactionStatusMessage;
 import com.plantify.notification.domain.entity.Notification;
+import com.plantify.notification.domain.entity.Status;
 import com.plantify.notification.repository.NotificationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,6 @@ public class TransactionStatusServiceImpl implements TransactionStatusService {
         try {
             Notification notification = Notification.builder()
                     .userId(message.userId())
-                    .transactionType(message.transactionType())
                     .status(message.status())
                     .build();
             Notification savedNotification = notificationRepository.save(notification);
@@ -38,18 +38,14 @@ public class TransactionStatusServiceImpl implements TransactionStatusService {
         try {
             Notification notification = Notification.builder()
                     .userId(message.userId())
-                    .transactionType(message.transactionType())
-                    .status(message.status())
+                    .status(Status.FAILED)
                     .build();
             Notification savedNotification = notificationRepository.save(notification);
 
             NotificationResponse response = NotificationResponse.from(savedNotification, message);
             notificationService.sendToClient(response);
-            log.info("Processed failed transaction: {}", message.transactionId());
         } catch (Exception e) {
             log.error("Error handling failed transaction: {}", e.getMessage());
         }
     }
-
-    
 }

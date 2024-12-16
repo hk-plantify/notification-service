@@ -6,8 +6,6 @@ import reactor.core.publisher.Flux;
 
 public interface NotificationService {
 
-//    SseEmitter subscribe();
-//    void sendToClient(NotificationResponse response);
     Flux<NotificationResponse> subscribe();
     void sendToClient(NotificationResponse response);
 }

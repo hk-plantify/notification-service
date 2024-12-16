@@ -1,6 +1,7 @@
 package com.plantify.notification.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,11 +24,11 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
-                                "/swagger-ui.html"
+                                "/swagger-ui.html",
+                                "/",
+                                "/v1/admin/**"
                         ).permitAll()
-                        .requestMatchers("/v1/admin/**")
-                        .hasAnyRole("MANAGER", "ADMIN")
-                        .requestMatchers("/v1/notifications")
+                        .requestMatchers("/v1/notifications/subscribe")
                         .hasAnyRole("USER")
                         .anyRequest()
                         .authenticated()
@@ -36,4 +37,10 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+    @Value("${client.base.url}")
+    private String clientBaseUrl;
+
+    @Value("${client.pay.url}")
+    private String clientPayUrl;
 }

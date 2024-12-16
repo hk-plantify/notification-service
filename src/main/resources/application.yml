@@ -26,9 +26,6 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       properties:
         spring.deserializer.value.delegate.class: org.apache.kafka.common.serialization.ByteArrayDeserializer
-        security.protocol: SASL_PLAINTEXT
-        sasl.mechanism: SCRAM-SHA-256
-        sasl.jaas.config: org.apache.kafka.common.security.scram.ScramLoginModule required username="user1" password="nl8P18Py3g";
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     topic:
@@ -36,4 +33,10 @@ spring:
 
 auth:
   service:
-    url: http://auth-service.auth:8888
+    url: http://auth-service.auth.svc.cluster.local:8080
+
+client:
+  base:
+    url: ENC(6glvmh8vfHd2D/ALcgqR+tXcm+DH+AZbkofU7nK5p2eE0RzPXoNE1uHTORYrT/dA)
+  pay:
+    url: ENC(YKKOs+X8eUEdzzngWa8yjQlR4W0uy69aKFe1AMAee9FP2nauBEWpCM6FyDXpbIprBGi7LReqA4M=)

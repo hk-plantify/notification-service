@@ -17,8 +17,7 @@ private final Sinks.Many<NotificationResponse> sink = Sinks.many().multicast().o
     private final UserInfoProvider userInfoProvider;
 
     public Flux<NotificationResponse> subscribe() {
-//        Long userId = userInfoProvider.getUserInfo().userId();
-        Long userId = 2L;
+        Long userId = userInfoProvider.getUserInfo().userId();
         log.info("Subscribing userId: {}", userId);
         return sink.asFlux()
                 .filter(response -> response.userId().equals(userId))

@@ -32,11 +32,10 @@ public class SecurityConfig {
                                 "/swagger-ui.html",
                                 "/",
                                 "/v1/admin/**",
-                                "/v1/notifications/subscribe",
                                 "/index.html"
                         ).permitAll()
-//                        .requestMatchers("/v1/notifications/subscribe")
-//                        .hasAnyRole("USER")
+                        .requestMatchers("/v1/notifications/subscribe")
+                        .hasAnyRole("USER")
                         .anyRequest()
                         .authenticated()
                 )
